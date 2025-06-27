@@ -3,6 +3,7 @@ import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 import CardProjet from '../components/CardProjet.astro';
 import projets from '../data/projets.json';
+import Header from '../components/Header.astro';
 
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
@@ -18,13 +19,17 @@ import projets from '../data/projets.json';
     <title>Portfolio Eunice</title>
   </head>
   <body class="bg-mint font-sans text-gray-900">
-    <!-- <Header /> -->
+    <Header />
 
     <main class="p-8">
-      <h1 class="text-4xl font-bold mb-6">Mes projets</h1>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <h1 class="text-4xl font-bold mb-6">I'M EUNICE MUTOPE</h1>
+	  <p>I design and build  accessible, user-friendly interfaces.</p>
+	  <div>WEBSITE</div>
+	  <div>POSTER DESIGN</div>
+	  <div>HOBBY</div>
+      <!-- <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         {projets.map(projet => <CardProjet projet={projet} />)}
-      </div>
+      </div> -->
     </main>
   </body>
 </html>
