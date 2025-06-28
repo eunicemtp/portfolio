@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css'; // ✅ Import CSS correctement ici (chemin selon ton arbo)
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 ---
 <!doctype html>
 <html lang="en">
@@ -14,8 +16,11 @@ import '../styles/global.css'; // ✅ Import CSS correctement ici (chemin selon 
 		<title>Portfolio</title>
 		
 	</head>
-	<body>
+	<body class="bg-purple-light flex flex-col px-16">
+		<Header />
+		
 		<slot />
+		<Footer />
 	</body>
 </html>
 
@@ -32,5 +37,6 @@ import '../styles/global.css'; // ✅ Import CSS correctement ici (chemin selon 
 		font-family: "Josefin Sans", sans-serif;
 		font-style: normal;
 	}
+	
 
 </style>

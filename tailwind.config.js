@@ -10,8 +10,8 @@ export default {
       colors: {
         // ✅ Tes couleurs personnalisées ici
         purple: {
-          light: '#AE3FF',
-          dark: '#706CB9',
+          light: '#EAE3FF',
+          darker: '#706CB9',
           form:'#DACEFF',
         },
         green: {
@@ -24,6 +24,7 @@ export default {
         },
         whitey: '#FDFCFF',
         beige: '#FEF9F5',
+        blue: '#162258',
       },
     },
   },
