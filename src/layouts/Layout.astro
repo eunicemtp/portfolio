@@ -1,11 +1,18 @@
+---
+import '../styles/global.css'; // ✅ Import CSS correctement ici (chemin selon ton arbo)
+---
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>Portfolio</title>
+		
 	</head>
 	<body>
 		<slot />
@@ -18,5 +25,12 @@
 		margin: 0;
 		width: 100%;
 		height: 100%;
+		font-family: "Inter", sans-serif;
+		font-style: normal;
 	}
+	h1,h2,h3,h4{
+		font-family: "Josefin Sans", sans-serif;
+		font-style: normal;
+	}
+
 </style>
