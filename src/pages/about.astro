@@ -1,16 +1,23 @@
 ---
+
+
+import Layout from '../layouts/Layout.astro';
+import projets from '../data/projets.json';
 import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Aboutme from '../components/About__.astro';
+import { translations } from '../data/lang.js';
+
+import '../styles/global.css';
+const lang = 'en'; // ou 'fr'
+const pageKey = 'about';
+const t = translations[lang];
 ---
 
-<html lang="fr">
-  <head>
-    <title>À propos</title>
-  </head>
-  <body class="bg-mint font-inter text-gray-900">
-    <Header />
-    <main class="p-8">
-      <h2 class="text-3xl font-bold mb-4">À propos</h2>
-      <p>Ici tu parleras de toi.</p>
-    </main>
-  </body>
-</html>
+
+
+
+
+<Layout title={t.title[pageKey]} pageClass={`${lang} ${pageKey}`}>
+    <Aboutme/>
+</Layout>
