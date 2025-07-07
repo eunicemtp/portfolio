@@ -2,9 +2,10 @@
 import '../styles/global.css'; // ✅ Import CSS correctement ici (chemin selon ton arbo)
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+const { title = "Page", pageClass = "", children } = Astro.props;
 ---
 <!doctype html>
-<html lang="en">
+<html lang={pageClass.includes('en') ? 'fr' : 'en'}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -13,13 +14,16 @@ import Footer from '../components/Footer.astro';
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
 		<meta name="generator" content={Astro.generator} />
-		<title>Portfolio</title>
+		<!-- <title>Portfolio</title> -->
+		 <title>{title} | Portfolio</title>
 		
 	</head>
-	<body class="bg-purple-light flex flex-col px-16">
+	<body class={`${pageClass} bg-purple-light flex flex-col`}>
 		<Header />
+		<main class="px-16">
+			<slot />
+		</main>
 		
-		<slot />
 		<Footer />
 	</body>
 </html>
