@@ -1,0 +1,43 @@
+---
+// src/pages/work.astro
+import Layout from '../../layouts/Layout.astro';
+import ProjectCard from '../../components/CardProjet.astro';
+import projets from '../../data/projets.json';
+import { translations } from '../../data/lang.js';
+
+const lang = 'en';
+const pageKey = 'work';
+const t = translations[lang];
+
+const filtres = ['website', 'poster', 'hobby'];
+const selected = 'website'; // à rendre dynamique plus tard
+---
+
+<Layout title={t.title[pageKey]} pageClass={`${lang} ${pageKey}`}>
+  <section class="px-6 md:px-16 py-20 bg-whitey" x-data="{ selected: 'website' }">
+    <h2 class="text-h2 font-bold text-blue mb-8">Work</h2>
+
+    <!-- Tabs -->
+    <div class="flex gap-6 mb-12">
+      <template x-for="filtre in ['website', 'poster', 'hobby']">
+        <button
+          @click="selected = filtre"
+          :class="selected === filtre ? 'bg-purple-light text-white' : 'bg-whitey text-blue'"
+          class="uppercase font-bold px-4 py-2 rounded-full border border-purple-darker transition"
+          x-text="filtre.charAt(0).toUpperCase() + filtre.slice(1)"
+        ></button>
+      </template>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      {projets.map(projet => (
+        <div x-show="selected === '{projet.categorie}'" class="transition">
+          <ProjectCard {...projet} />
+        </div>
+      ))}
+    </div>
+  </section>
+</Layout>
+
+<script type="module" src="/src/data/alpine.js"></script>

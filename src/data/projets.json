@@ -1,10 +1,43 @@
 [
   {
+    "slug": "kivia",
     "nom": "KIVIA",
-    "description": "Application solidaire pour femmes, avec réservation de trajets, carte, espace personnel."
+    "slogan": "Application solidaire pour femmes",
+    "description": "Application solidaire pour femmes, avec réservation de trajets, carte, espace personnel.",
+    "about": "KIVIA est une application pensée pour la sécurité et l’autonomie des femmes. Elle permet de réserver des trajets entre femmes, suivre les courses en temps réel, et échanger dans un espace personnel bienveillant.",
+    "image": "/assets/mockup_kivia1.png",
+    "gallery": [
+      "/assets/mockup_kivia2.png",
+      "/assets/mockup_kivia1.png",
+      "/assets/mockup_kivia2.png",
+      "/assets/mockup_kivia1.png"
+    ],
+    "stack": ["Astro", "TailwindCSS", "Figma", "GSAP"],
+    "categorie": "website"
   },
   {
+    "slug": "rux",
     "nom": "RUX",
-    "description": "Exploration graphique autour de l’identité et du voyage."
+    "slogan": "Une exploration graphique autour du voyage",
+    "description": "Exploration graphique autour de l’identité et du voyage.",
+    "about": "RUX est un projet visuel inspiré par la dualité entre l’ancrage personnel et l’ouverture au monde. Il mêle collages, illustrations, et typographie expressive.",
+    "image": "/assets/projects/rux.png",
+    "gallery": [
+      "/assets/projects/rux-01.png",
+      "/assets/projects/rux-02.png"
+    ],
+    "stack": ["Illustrator", "Photoshop", "InDesign"],
+    "categorie": "poster"
+  },
+  {
+    "slug": "new",
+    "nom": "Mon nouveau projet",
+    "slogan": "Un titre personnalisé pour ce projet",
+    "description": "Description ici...",
+    "about": "Détail libre de ce projet. Ce champ s’affiche si tu le renseignes.",
+    "image": "/assets/projects/mon-projet.png",
+    "gallery": [],
+    "stack": ["Astro", "Illustrator"],
+    "categorie": "hobby"
   }
 ]

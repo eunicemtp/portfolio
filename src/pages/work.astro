@@ -1,16 +1,38 @@
 ---
-import Header from '../components/Header.astro';
+// src/pages/work.astro
+import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/CardProjet.astro';
+import projets from '../data/projets.json';
+import { translations } from '../data/lang.js';
+
+const lang = 'en';
+const pageKey = 'work';
+const t = translations[lang];
+
+const filtres = ['website', 'poster', 'hobby'];
+const selected = 'website'; // à rendre dynamique plus tard
 ---
 
-<html lang="fr">
-  <head>
-    <title>Mes projets</title>
-  </head>
-  <body class="bg-mint  text-gray-900">
-    <Header />
-    <main class="p-8">
-      <h2 class="text-3xl font-bold mb-4">Mes projets</h2>
-      <p>Ici tu parleras de tes projets</p>
-    </main>
-  </body>
-</html>
+<Layout title={t.title[pageKey]} pageClass={`${lang} ${pageKey}`}>
+  <section class="px-6 md:px-16 py-20 bg-whitey">
+    <h2 class="text-h2 font-bold text-blue mb-8">Work</h2>
+
+    <!-- Tabs -->
+    <div class="flex gap-6 mb-12">
+      {filtres.map(filtre => (
+        <button class={`uppercase font-bold px-4 py-2 rounded-full ${filtre === selected ? 'bg-purple-light' : ''}`}>
+          {filtre.replace(/^\w/, l => l.toUpperCase())}
+        </button>
+      ))}
+    </div>
+
+    <!-- Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      {projets
+        .filter(p => p.categorie === selected)
+        .map(projet => (
+          <ProjectCard {...projet} />
+        ))}
+    </div>
+  </section>
+</Layout>
