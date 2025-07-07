@@ -17,7 +17,7 @@
 
 @media (min-width: 1024px) {
   :root {
-    --font-size-p: 25px;
+    --font-size-p: 18px;
     --font-size-h1: 91px;
     --font-size-h2: 81px;
     --font-size-h3: 64px;
@@ -34,6 +34,8 @@ h1,h2,h3,h4,H5{
 p{
     font-family: "Inter", sans-serif;
     font-style: normal;
+    font-size: var(--font-size-p);
+    @apply text-blue
 }
 
 .text-p {
@@ -64,3 +66,7 @@ p{
 
 /* etc. */
 
+
+.about main, .contact main, .work main{
+    padding: 0;
+}
