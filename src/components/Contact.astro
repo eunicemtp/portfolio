@@ -3,52 +3,101 @@
   <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
     <!-- FORM COLUMN -->
     <div>
-      <!-- TITLE -->
-      <h2 class="text-h2 font-bold text-blue mb-12 relative inline-block border-b-4 border-blue">
-        Contact Me
-      </h2>
+        <!-- TITLE -->
+        <h2 class="text-h2 font-bold text-blue mb-12 relative inline-block border-b-4 border-blue">
+            Contact Me
+        </h2>
 
-      <form class="flex flex-col gap-6">
-        <!-- ROW 1: First + Last Name -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label class="block font-bold mb-1">First Name</label>
-            <input type="text" placeholder="Eugène" class="w-full border border-purple-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-purple-darker" />
-          </div>
-          <div>
-            <label class="block font-bold mb-1">Last Name</label>
-            <input type="text" placeholder="Béavogui" class="w-full border border-purple-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-purple-darker" />
-          </div>
-        </div>
+    
+        <form class="flex flex-col gap-6" id="contact-form"
+            action="https://formspree.io/f/meokyqbg?accept=html"
+            method="POST">
+            <!-- ROW 1: First + Last Name -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label class="block font-bold mb-1">First Name</label>
+                <input type="text" name="firstName" placeholder="Eugène" class="w-full border border-purple-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-purple-darker" />
+                <input type="text" name="_gotcha" style="display:none" />
 
-        <!-- ROW 2: Email + Subject -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label class="block font-bold mb-1">E-mail</label>
-            <input type="email" placeholder="eugenebastos24@gmail.com" class="w-full border border-purple-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-purple-darker" />
-          </div>
-          <div>
-            <label class="block font-bold mb-1">Object</label>
-            <input type="text" class="w-full border border-purple-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-purple-darker" />
-          </div>
-        </div>
+            </div>
+            <div>
+                <label class="block font-bold mb-1">Last Name</label>
+                <input type="text" name="lastName" placeholder="Béavogui" class="w-full border border-purple-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-purple-darker" />
+            </div>
+            </div>
 
-        <!-- ROW 3: Message -->
-        <div>
-          <label class="block font-bold mb-1">Message</label>
-          <textarea rows="5" class="w-full border border-purple-300 rounded-lg p-3 resize-none focus:outline-none focus:ring-2 focus:ring-purple-darker"></textarea>
-        </div>
+            <!-- ROW 2: Email + Subject -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block font-bold mb-1">E-mail</label>
+                    <input type="email" name="email" placeholder="eugenebastos24@gmail.com" class="w-full border border-purple-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-purple-darker" />
+                </div>
+            <div>
+                <label class="block font-bold mb-1">Object</label>
+                <input type="text" name="subject" class="w-full border border-purple-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-purple-darker" />
+            </div>
+            </div>
 
-        <!-- SUBMIT BUTTON -->
-        <button type="submit" class="uppercase bg-purple-darker text-white px-10 py-3 rounded-xl mx-auto hover:bg-purple-light transition">
-          Submit
-        </button>
-      </form>
+            <!-- ROW 3: Message -->
+            <div>
+                <label class="block font-bold mb-1">Message</label>
+                <textarea rows="5" name="message" class="w-full border border-purple-300 rounded-lg p-3 resize-none focus:outline-none focus:ring-2 focus:ring-purple-darker"></textarea>
+            </div>
+
+            <!-- SUBMIT BUTTON -->
+            <button type="submit" class="uppercase bg-purple-darker text-white px-10 py-3 rounded-xl mx-auto hover:bg-purple-light transition">
+            Submit
+            </button>
+            <div id="confirmation" class="fixed inset-0 bg-black/30 z-50 hidden custom_pop items-center justify-center">
+            <div class="bg-white rounded-xl shadow-xl p-6 max-w-sm text-center border-2 border-purple-darker">
+                <p class="text-green-700 font-semibold mb-4">
+                 Merci ! Votre message a bien été envoyé.
+                </p>
+                <button
+                onclick="document.getElementById('confirmation').style.display = 'none'"
+                class="mt-2 px-4 py-2 bg-purple-darker text-white rounded-full hover:bg-purple-light transition"
+                >
+                Fermer
+                </button>
+            </div>
+            </div>
+        </form>
     </div>
 
     <!-- AVATAR COLUMN -->
     <div class="flex justify-center md:justify-end items-start relative">
-      <img src="/assets/avatar_contact.png" alt="Eunice avatar" class="w-[400px] max-w-full" />
+        <img src="/assets/avatar_contact2.png" alt="Eunice avatar" class="w-[400px] max-w-full" />
     </div>
   </div>
 </section>
+
+<script>
+const form = document.getElementById('contact-form') as HTMLFormElement;
+const confirmation = document.getElementById('confirmation');
+
+form?.addEventListener('submit', async function (e) {
+  e.preventDefault();
+
+  const data = new FormData(form);
+
+  const response = await fetch(form.action, {
+    method: form.method,
+    body: data,
+    headers: { Accept: 'application/json' }
+  });
+
+  if (response.ok) {
+    form.reset();
+    if (confirmation) {
+      confirmation.style.display = 'flex';
+    }
+  } 
+//   else {
+//     alert("Une erreur s'est produite. Veuillez réessayer.");
+//   }
+});
+
+</script>
+
+
+
