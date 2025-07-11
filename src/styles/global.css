@@ -70,3 +70,12 @@ p{
 .about main, .contact main, .work main{
     padding: 0;
 }
+
+.Photography .banner_img{
+
+    /* width: 65%; */
+    /* margin-left: 20%; */
+    /* position: relative;
+    right: 0; */
+    max-width: 370px;
+}

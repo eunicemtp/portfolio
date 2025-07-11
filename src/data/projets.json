@@ -30,14 +30,12 @@
     "categorie": "poster"
   },
   {
-    "slug": "new",
-    "nom": "Mon nouveau projet",
-    "slogan": "Un titre personnalisé pour ce projet",
-    "description": "Description ici...",
-    "about": "Détail libre de ce projet. Ce champ s’affiche si tu le renseignes.",
-    "image": "/assets/projects/mon-projet.png",
-    "gallery": [],
-    "stack": ["Astro", "Illustrator"],
+    "slug": "photography",
+    "nom": "Photography",
+    "description": "Quand je ne code pas, j’observe. Voici un regard sur le monde, figé à travers mon objectif.",
+    "image": "/assets/camera_2.png",
+ 
+    
     "categorie": "hobby"
   }
 ]
