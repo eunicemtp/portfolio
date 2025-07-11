@@ -9,9 +9,9 @@ const { nom, image, description, slug } = Astro.props;
   <p class="mt-2 text-sm">{projet.description}</p>
 </article> -->
 
-<a href={`/work/${slug}`} class="bg-purple-light rounded-2xl p-4 shadow hover:scale-105 transition flex flex-col">
+<a href={`/work/${slug}`} class="bg-purple-light rounded-2xl p-4 shadow hover:scale-105 transition flex flex-col justify-around text-left min-h-[450px]">
   <img src={image} alt={nom} class="w-full h-auto mb-4 rounded" />
   <h3 class="text-lg font-bold mb-1">{nom}</h3>
   <p class="text-sm mb-3">{description}</p>
-  <span class="text-sm font-bold underline">Read more</span>
+  <span class="text-sm font-bold underline">See more</span>
 </a>
