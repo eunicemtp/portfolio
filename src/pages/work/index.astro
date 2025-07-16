@@ -15,30 +15,51 @@ const filtres = ['all','website', 'poster', 'hobby'];
   <script src="https://unpkg.com/alpinejs" defer></script>
 
 
-  <section class="px-6 md:px-16 py-20 bg-whitey" x-data="{ selected: 'all' }">
-    <h2 class="text-h2 font-bold text-blue mb-8">Work</h2>
+  <section
+  class="px-6 md:px-16 py-20 bg-whitey"
+  x-data="{ selected: 'all' }"
+  x-init="
+    const urlParams = new URLSearchParams(window.location.search);
+    const filterParam = urlParams.get('filter');
+    if (filterParam) selected = filterParam;
+  "
+>
+  <h2 class="text-h2 font-bold text-blue mb-8">Work</h2>
 
-    <!-- Onglets -->
-    <div class="flex gap-6 mb-12">
-      {filtres.map(filtre => (
-        <button
-          type="button"
-          x-on:click={`selected = '${filtre}'`}
-          x-bind:class={`selected === '${filtre}' ? 'bg-purple-darker text-whitey' : 'bg-whitey text-blue hover:bg-purple-light hover:text-blue hover:border-purple-darker'`}
-          class="uppercase font-bold px-4 py-2 rounded-full border border-purple-darker hover:border-puple-light transition"
-        >
-          {filtre.toUpperCase()}
-        </button>
-      ))}
-    </div>
+  <!-- Filtres -->
+  <div class="flex gap-6 mb-12">
+  {filtres.map(filtre => (
+    <button
+      type="button"
+      x-on:click={`selected = '${filtre}'`}
+      x-bind:class={`selected === '${filtre}' 
+        ? 'bg-purple-darker text-whitey border-purple-darker' 
+        : 'bg-whitey text-blue hover:bg-purple-light hover:border-purple-darker'`}
+      class="uppercase font-bold px-4 py-2 rounded-full border transition"
+    >
+      {filtre.toUpperCase()}
+    </button>
+  ))}
+</div>
 
-    <!-- Grille de projets -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-      {projets.map(projet => (
-        <div x-show={`selected === 'all' || selected === '${projet.categorie}'`}  class="transition">
-          <ProjectCard {...projet} />
-        </div>
-      ))}
-    </div>
-  </section>
+
+  <!-- Projets -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+    {projets.map(projet => (
+      <div x-show={`selected === 'all' || selected === '${projet.categorie}'`} class="transition">
+        <ProjectCard {...projet} />
+      </div>
+    ))}
+  </div>
+</section>
+
 </Layout>
+
+<script>
+  function filterHandler() {
+    const params = new URLSearchParams(window.location.search);
+    return {
+      selected: params.get('filter') || 'all'
+    }
+  }
+</script>

@@ -3,9 +3,10 @@ import '../styles/global.css'; // ✅ Import CSS correctement ici (chemin selon 
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 const { title = "Page", pageClass = "", children } = Astro.props;
+const lang = pageClass.includes("en") ? "en" : "fr";
 ---
 <!doctype html>
-<html lang={pageClass.includes('en') ? 'fr' : 'en'}>
+<html lang={pageClass.includes('en') ? 'en' : 'fr'}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -13,13 +14,17 @@ const { title = "Page", pageClass = "", children } = Astro.props;
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+		 <!-- Import GSAP et ScrollTrigger via CDN -->
+		<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js" defer></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js" defer></script>
 		<meta name="generator" content={Astro.generator} />
 		<!-- <title>Portfolio</title> -->
 		 <title>{title} | Portfolio</title>
 		
 	</head>
 	<body class={`${pageClass} bg-purple-light flex flex-col`}>
-		<Header />
+		<Header lang={lang} />
 		<main class="px-16">
 			<slot />
 		</main>
@@ -44,3 +49,66 @@ const { title = "Page", pageClass = "", children } = Astro.props;
 	
 
 </style>
+
+<script>
+	gsap.from('.skill-icon', {
+      scrollTrigger: {
+        trigger: '.skills-section',
+        start: 'top 70%', // déclenche quand la section atteint 80% de la hauteur du viewport
+        toggleActions: 'play none none none',
+        markers: true, // tu peux mettre false ou retirer ensuite
+      },
+      opacity: 0,
+      y: 30,
+      stagger: 0.3,
+      duration: 3.6,
+    //   ease: 'power2.out',
+      ease: 'bounce',
+    });
+
+  // Animation au chargement
+  const links = document.querySelectorAll("a.js-work-link");
+  const currentPath = window.location.pathname;
+
+  links.forEach(link => {
+    const underline = link.querySelector(".underline");
+    const href = link.getAttribute("href");
+    const isStatic = link.classList.contains("stay-underline");
+    const isActiveLink = href === currentPath || (href === "/" && currentPath === "/index.html");
+
+    // Crée une timeline GSAP
+    (link as any).tl = gsap.timeline({ paused: true });
+
+    (link as any).tl.fromTo(
+      underline,
+      { width: "0%", left: "0%" },
+      { width: "100%", duration: 1 }
+    );
+
+    // Ajoute animation de sortie uniquement si ce n’est pas un lien fixe
+    if (!isStatic && !isActiveLink) {
+      (link as any).tl.add("midway");
+
+      (link as any).tl.fromTo(
+        underline,
+        { width: "100%", left: "0%" },
+        { width: "0%", left: "100%", duration: 1, immediateRender: false }
+      );
+    }
+
+    if (isActiveLink || isStatic) {
+      // Ligne visible directement
+      gsap.set(underline, { width: "100%" });
+    } else {
+      // Animation au chargement
+      (link as any).tl.play(0);
+
+      // Hover animation
+      link.addEventListener("mouseenter", () => (link as any).tl.tweenFromTo(0, "midway"));
+      link.addEventListener("mouseleave", () => (link as any).tl.play());
+    }
+  });
+
+  
+
+</script>

@@ -1,0 +1,9 @@
+---
+// src/components/LangSwitcher.astro
+const { currentLang = "en" } = Astro.props;
+const altLang = currentLang === "en" ? "fr" : "en";
+---
+<div class="flex gap-2 items-center text-sm font-semibold uppercase">
+  <a href="/fr" class={currentLang === 'fr' ? 'underline' : ''}>FR</a> |
+  <a href="/en" class={currentLang === 'en' ? 'underline' : ''}>EN</a>
+</div>

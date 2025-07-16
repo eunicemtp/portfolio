@@ -1,11 +1,21 @@
-<header class=" w-full flex">
-    <nav class="w-full py-4 px-6 flex justify-end items-center  h-[10vh] ">
+---
+import LangSwitcher from './LangSwitcher.astro';
+const { lang } = Astro.props;
 
-        <ul class="flex gap-6 font-medium">
-            <li><a href="/" class="hover:underline">Home</a></li>
-            <li><a href="/about" class="hover:underline">About</a></li>
-            <li><a href="/work" class="hover:underline">Work</a></li>
-            <li><a href="/contact" class="hover:underline">Contact</a></li>
-        </ul>
-    </nav> 
+---
+<header class="w-full flex">
+  <nav class="w-full py-4 px-6 flex justify-end items-center h-[10vh]">
+    <ul class="flex gap-6 font-medium">
+      <li><a href="/" class="js-work-link">Home<span class="underline bg-purple-darker"></span></a></li>
+      <li><a href="/about" class="js-work-link">About<span class="underline bg-purple-darker"></span></a></li>
+      <li><a href="/work" class="js-work-link">Work<span class="underline bg-purple-darker"></span></a></li>
+      <li><a href="/contact" class="js-work-link">Contact<span class="underline bg-purple-darker"></span></a></li>
+      <LangSwitcher currentLang={lang} />
+    </ul>
+  </nav>
 </header>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+

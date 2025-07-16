@@ -1,26 +1,84 @@
+---
+import { translations } from '../data/lang.js';
 
-    <h1 class="text-h1 font-bold text-blue max-w-[0ch]"><span class="text-h3">I'M </span>EUNICE MUTOPE</h1>
-    <h4 class="text-h4 text-green-dark font-inter max-w-[20ch]">I design and build  accessible, user-friendly interfaces.</h4>
-     <img src="/assets/avatar_acceuil.png" alt="" class="w-[430px] absolute right-20 top-32 -z-10" />
-    <div class="flex gap-20 text-center mt-10 justify-center text-h5 font-jose font-bold relative mb-10">
-        
-        <div class="bg-beige w-[250px] h-[150px] flex flex-col items-center justify-center rounded-3xl shadow-md relative text-center">
-            <span class="text-h5 font-bold text-blue z-10">WEBSITE</span>
-            <img src="/assets/website_ribbon2.png" alt="" class="absolute z-0 w-[200px]" />
-        </div>
-        <div class="bg-green-light w-[250px] h-[150px] flex flex-col items-center justify-center rounded-3xl shadow-md relative text-center">
-            <span class="text-h5 font-bold text-blue z-10">POSTER DESIGN</span>
-            <img src="/assets/poster_ribbon3.png" alt="" class="absolute z-0 w-[200px]" />
-        </div>
-        <div class="bg-purple-darker w-[250px] h-[150px] flex flex-col items-center justify-center rounded-3xl shadow-md relative text-center">
-            <span class="text-h5 font-bold text-blue z-10">HOBBY</span>
-            <img src="/assets/hobby_ribbon2.png" alt="" class="absolute z-0 w-[200px]" />
-        </div>
-        <div class="bg-whitey w-[100vw] h-60 absolute top-20 -z-10"></div>
-        <!-- <div class="bg-green-light w-[300px] h-[195px] flex items-center justify-center rounded-3xl">POSTER DESIGN</div>
-        <div class="bg-purple-darker w-[300px] h-[195px] flex items-center justify-center rounded-3xl">HOBBY</div> -->
-    </div>
+type Lang = 'en' | 'fr';
+
+
+const { lang } = Astro.props as { lang: Lang };
+
+const t = translations[lang] || translations['en'];
+
+console.log(t.content.home.headline);
+
+---
     
+    <h1 class="text-h1 font-bold text-blue max-w-[0ch]"><span class="text-h3">{t.content.home.headline} </span>{t.content.home.name}</h1>
+    <h4 class="text-h4 text-green-dark font-inter max-w-[20ch]">{t.content.home.subheadline}</h4>
+     <img src="/assets/avatar_acceuil.png" alt="" class="w-[430px] absolute right-20 top-32 -z-10" />
+
+    
+    <div class="flex gap-20 text-center mt-10 justify-center text-h5 font-jose font-bold relative mb-10">
+
+        <!-- Exemple : une carte flip -->
+        <a href="work?filter=website" class="flip-card w-[250px] h-[150px]">
+            <div class="flip-inner rounded-3xl shadow-md">
+
+            <!-- Face avant -->
+            <div class="flip-front bg-beige rounded-3xl flex flex-col items-center justify-center relative">
+                <span class="text-h5 font-bold text-blue z-10">{t.content.home.card.web}</span>
+                <img src="/assets/website_ribbon2.png" alt="" class="absolute z-0 w-[200px]" />
+            </div>
+
+            <!-- Face arrière -->
+            <div class="flip-back bg-beige  rounded-3xl flex flex-col items-center justify-center relative">
+                <img src="/assets/flip_web.png" alt="" class=" z-0 w-[135px]" />
+                <span class=" text-p font-bold text-blue z-10">{t.content.home.card.subtext}</span>
+            </div>
+
+            </div>
+        </a>
+        <a href="work?filter=poster" class="flip-card w-[250px] h-[150px]">
+            <div class="flip-inner rounded-3xl shadow-md">
+
+            <!-- Face avant -->
+            <div class="flip-front bg-green-light rounded-3xl flex flex-col items-center justify-center relative">
+                <span class="text-h5 font-bold text-blue z-10">{t.content.home.card.poster}</span>
+                <img src="/assets/poster_ribbon3.png" alt="" class="absolute z-0 w-[200px]" />
+            </div>
+
+            <!-- Face arrière -->
+            <div class="flip-back bg-green-light rounded-3xl flex flex-col items-center justify-center relative">
+                <img src="/assets/flip_poster.png" alt="" class=" z-0 w-[135px]" />
+                <span class="text-p font-bold text-blue z-10">{t.content.home.card.subtext}</span>
+            </div>
+
+            </div>
+        </a>
+        <a href="/work?filter=hobby" class="flip-card w-[250px] h-[150px]">
+            <div class="flip-inner rounded-3xl shadow-md">
+
+            <!-- Face avant -->
+            <div class="flip-front bg-purple-darker rounded-3xl flex flex-col items-center justify-center relative">
+                <span class="text-h5 font-bold text-blue z-10">{t.content.home.card.hobby}</span>
+                <img src="/assets/hobby_ribbon2.png" alt="" class="absolute z-0 w-[200px]" />
+            </div>
+
+            <!-- Face arrière -->
+            <div class="flip-back bg-purple-darker rounded-3xl flex flex-col items-center justify-center relative">
+                <img src="/assets/flip_hobby.png" alt="" class=" z-0 w-[130px]" />
+                <span class="text-p font-bold text-blue z-10">{t.content.home.card.subtext}</span>
+            </div>
+
+            </div>
+        </a>
+ <div class="bg-whitey w-[100vw] h-60 absolute top-20 -z-10"></div>
+  <!-- Répète pour les autres cartes... -->
+</div>
+
+<!-- Fond blanc -->
+<!-- <div class="bg-whitey w-[100vw] h-60 absolute top-20 -z-10"></div>
+  -->
+
 
       <!-- <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         {projets.map(projet => <CardProjet projet={projet} />)}
