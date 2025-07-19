@@ -1,10 +1,6 @@
 [
   {
-    "slug": "kivia",
-    "nom": "KIVIA",
-    "slogan": "Application solidaire pour femmes",
-    "description": "Application solidaire pour femmes, avec réservation de trajets, carte, espace personnel.",
-    "about": "KIVIA est une application pensée pour la sécurité et l’autonomie des femmes. Elle permet de réserver des trajets entre femmes, suivre les courses en temps réel, et échanger dans un espace personnel bienveillant.",
+"slug": "kivia",
     "image": "/assets/mockup_kivia1.png",
     "gallery": [
       "/assets/mockup_kivia2.png",
@@ -13,29 +9,60 @@
       "/assets/mockup_kivia1.png"
     ],
     "stack": ["Astro", "TailwindCSS", "Figma", "GSAP"],
-    "categorie": "website"
+    "categorie": "website",
+    "i18n": {
+      "fr": {
+        "nom": "KIVIA",
+        "slogan": "Application solidaire pour femmes",
+        "description": "Application solidaire pour femmes, avec réservation de trajets, carte, espace personnel.",
+        "about": "KIVIA est une application pensée pour la sécurité et l’autonomie des femmes..."
+      },
+      "en": {
+        "nom": "KIVIA",
+        "slogan": "Supportive app for women",
+        "description": "Supportive app for women, with ride booking, map, and personal space.",
+        "about": "KIVIA is an app designed for women’s safety and autonomy..."
+      }
+    }
   },
   {
+    
     "slug": "rux",
-    "nom": "RUX",
-    "slogan": "Une exploration graphique autour du voyage",
-    "description": "Exploration graphique autour de l’identité et du voyage.",
-    "about": "RUX est un projet visuel inspiré par la dualité entre l’ancrage personnel et l’ouverture au monde. Il mêle collages, illustrations, et typographie expressive.",
     "image": "/assets/projects/rux.png",
     "gallery": [
       "/assets/projects/rux-01.png",
       "/assets/projects/rux-02.png"
     ],
     "stack": ["Illustrator", "Photoshop", "InDesign"],
-    "categorie": "poster"
+    "categorie": "poster",
+    "i18n": {
+      "fr": {
+        "nom": "RUX",
+        "slogan": "Une exploration graphique autour du voyage",
+        "description": "Exploration graphique autour de l’identité et du voyage.",
+        "about": "RUX est un projet visuel inspiré par la dualité entre l’ancrage personnel et l’ouverture au monde. Il mêle collages, illustrations, et typographie expressive."
+      },
+      "en": {
+        "nom": "RUX",
+        "slogan": "A graphic journey into travel",
+        "description": "A graphic exploration of identity and travel.",
+        "about": "RUX is a visual project inspired by the duality between personal roots and openness to the world. It blends collages, illustrations, and expressive typography."
+      }
+    }
   },
   {
     "slug": "photography",
-    "nom": "Photography",
-    "description": "Quand je ne code pas, j’observe. Voici un regard sur le monde, figé à travers mon objectif.",
     "image": "/assets/camera_2.png",
- 
-    
-    "categorie": "hobby"
+    "categorie": "hobby",
+    "i18n": {
+      "fr": {
+        "nom": "Photographie",
+        "description": "Quand je ne code pas, j’observe. Voici un regard sur le monde, figé à travers mon objectif."
+      },
+      "en": {
+        "nom": "Photography",
+        "description": "When I’m not coding, I observe. Here’s a look at the world, frozen through my lens."
+      }
+    }
   }
 ]

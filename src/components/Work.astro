@@ -1,6 +1,75 @@
- <!-- <h1 class="text-h1 font-bold text-blue max-w-[0ch]"><span class="text-h3">I'M </span>EUNICE MUTOPE</h1>
-    <h4 class="text-h4 text-green-dark font-inter max-w-[20ch]">I design and build  accessible, user-friendly interfaces.</h4>
-     <img src="/assets/avatar_acceuil.png" alt="" class="w-[430px] absolute right-20 top-20 -z-10" /> -->
+---
+// src/components/Work.astro
+import Layout from '../layouts/Layout.astro';
+import projets from '../data/projets.json';
+import { translations } from '../data/lang.js';
+import ProjectCard from '../components/CardProjet.astro';
+
+type Lang = 'en' | 'fr';
 
 
-     
+const { lang } = Astro.props as { lang: Lang };
+const pageKey = 'work';
+const t = translations[lang] || translations['en'];
+const filtres = [
+  { slug: 'all', label: t.content.work.all },
+  { slug: 'website', label: t.content.work.web },
+  { slug: 'poster', label: t.content.work.poster },
+  { slug: 'hobby', label: t.content.work.hobby }
+];
+
+---
+
+<!-- <Layout title={t.title[pageKey]} pageClass={`${lang} ${pageKey}`} lang={lang}> -->
+  
+  <script src="https://unpkg.com/alpinejs" defer></script>
+
+
+  <section
+  class="px-6 md:px-16 py-20 bg-whitey"
+  x-data="{ selected: 'all' }"
+  x-init="
+    const urlParams = new URLSearchParams(window.location.search);
+    const filterParam = urlParams.get('filter');
+    if (filterParam) selected = filterParam;
+  "
+>
+  <h2 class="text-h2 font-bold text-blue mb-8">{t.content.work.headline}</h2>
+
+  <!-- Filtres -->
+<div class="flex gap-6 mb-12">
+  {filtres.map(filtre => (
+    <button
+      type="button"
+      x-on:click={`selected = '${filtre.slug}'`}
+      x-bind:class={`selected === '${filtre.slug}' 
+        ? 'bg-purple-darker text-whitey border-purple-darker' 
+        : 'bg-whitey text-blue hover:bg-purple-light hover:border-purple-darker'`}
+      class="uppercase font-bold px-4 py-2 rounded-full border transition"
+    >
+      {filtre.label.toUpperCase()}
+    </button>
+  ))}
+</div>
+
+
+  <!-- Projets -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+    {projets.map(projet => (
+      <div x-show={`selected === 'all' || selected === '${projet.categorie}'`} class="transition">
+        <ProjectCard projet={projet} lang={lang}/>
+      </div>
+    ))}
+  </div>
+</section>
+
+<!-- </Layout> -->
+
+<script>
+  function filterHandler() {
+    const params = new URLSearchParams(window.location.search);
+    return {
+      selected: params.get('filter') || 'all'
+    }
+  }
+</script>

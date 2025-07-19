@@ -1,7 +1,11 @@
 ---
-const { projet } = Astro.props;
-// src/components/ProjectCard.astro
-const { nom, image, description, slug } = Astro.props;
+const { projet, lang } = Astro.props;
+
+const content = projet.i18n?.[lang] || projet.i18n?.['en'];
+
+if (!content) {
+  throw new Error(`Missing translations (i18n) for project: ${projet.slug}`);
+}
 ---
 
 <!-- <article class="p-4 border rounded-xl shadow transition hover:scale-105">
@@ -9,9 +13,10 @@ const { nom, image, description, slug } = Astro.props;
   <p class="mt-2 text-sm">{projet.description}</p>
 </article> -->
 
-<a href={`/work/${slug}`} class="bg-purple-light rounded-2xl p-4 shadow hover:scale-105 transition flex flex-col justify-around text-left min-h-[450px]">
-  <img src={image} alt={nom} class="w-full h-auto mb-4 rounded" />
-  <h3 class="text-lg font-bold mb-1">{nom}</h3>
-  <p class="text-sm mb-3">{description}</p>
-  <span class="text-sm font-bold underline">See more</span>
+<a href={`/${lang}/work/${projet.slug}`} class="bg-purple-light rounded-2xl p-4 shadow hover:scale-105 transition flex flex-col justify-around text-left min-h-[450px]">
+  <img src={projet.image} alt={content.nom} class="w-full h-auto mb-4 rounded" />
+  <h3 class="text-lg font-bold mb-1">{content.nom}</h3>
+  <p class="text-sm mb-3">{content.description}</p>
+  <span class="text-sm font-bold underline">
+    {lang === 'fr' ? 'Voir plus' : 'See more'}</span>
 </a>

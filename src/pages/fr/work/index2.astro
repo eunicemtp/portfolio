@@ -8,7 +8,6 @@ import Project from '../../../components/Work.astro';
 
 type Lang = 'en' | 'fr';
 
-
 const pageKey = 'work';
 const lang = 'fr'; // ou 'fr'
 const t = translations[lang];
@@ -22,7 +21,7 @@ const filtres = [
 
 ---
 
-<Layout title={t.title[pageKey]} pageClass={`${lang} ${pageKey}`}>
+  <Layout title={t.title[pageKey]} pageClass={`${lang} ${pageKey}`}>
 
     <Project lang={lang}/>
-</Layout>
+  </Layout>
