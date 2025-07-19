@@ -3,7 +3,10 @@ import '../styles/global.css'; // ✅ Import CSS correctement ici (chemin selon 
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 const { title = "Page", pageClass = "", children } = Astro.props;
-const lang = pageClass.includes("en") ? "en" : "fr";
+// const lang = pageClass.includes("en") ? "en" : "fr";
+// const { lang } = Astro.params;
+const match = Astro.url.pathname.match(/^\/(fr|en)(\/|$)/);
+const lang = match?.[1] ?? 'en'; // fallback en anglais si non trouvé
 ---
 <!doctype html>
 <html lang={pageClass.includes('en') ? 'en' : 'fr'}>

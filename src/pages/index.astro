@@ -1,10 +1,27 @@
-<!DOCTYPE html>
-<html lang="fr">
+---
+// src/pages/index.astro
+// Cette page s'affiche à la racine ("/") et redirige dynamiquement
+---
+
+<html lang="en">
   <head>
-    <meta http-equiv="refresh" content="0; URL='/fr'" />
-    <title>Redirection…</title>
+    <meta charset="UTF-8" />
+    <title>Redirection...</title>
+    <script>
+        const userLang = navigator.language;
+      // Prend la première partie du code langue (ex: "fr-BE" → "fr")
+      const shortLang = userLang.split('-')[0];
+
+      // Liste des langues prises en charge
+      const supportedLangs = ['fr', 'en'];
+
+      const lang = supportedLangs.includes(shortLang) ? shortLang : 'en';
+
+      // Redirection
+      window.location.href = `/${lang}`;
+    </script>
   </head>
   <body>
-    <p>Redirection vers la version française…</p>
+    <p>Redirection vers votre langue…</p>
   </body>
 </html>

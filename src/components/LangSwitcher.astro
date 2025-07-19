@@ -1,9 +1,19 @@
 ---
-// src/components/LangSwitcher.astro
 const { currentLang = "en" } = Astro.props;
+import { translations } from '../data/lang.js';
 const altLang = currentLang === "en" ? "fr" : "en";
+type Lang = 'en' | 'fr';
+const { lang } = Astro.props as { lang: Lang };
+
+// Ex: /fr/about → /en/about
+const currentPath = Astro.url.pathname;
+
+// Fonction pour générer le bon lien langue
+function switchLangUrl(lang: Lang) {
+  return `/${lang}${Astro.url.pathname.replace(/^\/(en|fr)/, "")}`;
+}
 ---
 <div class="flex gap-2 items-center text-sm font-semibold uppercase">
-  <a href="/fr" class={currentLang === 'fr' ? 'underline' : ''}>FR</a> |
-  <a href="/en" class={currentLang === 'en' ? 'underline' : ''}>EN</a>
+  <a href={switchLangUrl("fr")} class={currentLang === 'fr' ? 'underline' : ''}>FR</a> |
+  <a href={switchLangUrl("en")} class={currentLang === 'en' ? 'underline' : ''}>EN</a>
 </div>

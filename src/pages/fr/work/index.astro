@@ -1,12 +1,12 @@
 ---
 // src/pages/work.astro
-import Layout from '../../layouts/Layout.astro';
-import projets from '../../data/projets.json';
-import { translations } from '../../data/lang.js';
-import ProjectCard from '../../components/CardProjet.astro';
+import Layout from '../../../layouts/Layout.astro';
+import projets from '../../../data/projets.json';
+import { translations } from '../../../data/lang.js';
+import ProjectCard from '../../../components/CardProjet.astro';
 const { lang } = Astro.props as { lang: Lang };
 const pageKey = 'work';
-const t = translations[lang] || translations['en'];
+const t = translations[lang] || translations['fr'];
 const filtres = [
   t.content.work.all,
   t.content.work.web,
@@ -17,7 +17,7 @@ type Lang = 'en' | 'fr';
 
 ---
 
-<Layout title={t.title[pageKey]} pageClass={`${lang} ${pageKey}`}>
+<Layout title={t.title[pageKey]} pageClass={`${lang} ${pageKey}`} lang={lang}>
   
   <script src="https://unpkg.com/alpinejs" defer></script>
 

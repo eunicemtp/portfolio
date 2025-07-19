@@ -1,0 +1,26 @@
+---
+
+
+import Layout from '../../layouts/Layout.astro';
+import projets from '../../data/projets.json';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Aboutme from '../../components/About__.astro';
+import { translations } from '../../data/lang.js';
+
+import '../../styles/global.css';
+const lang = 'fr'; // ou 'fr'
+const pageKey = 'about';
+const t = translations[lang];
+
+// import SkillsAnim from '../components/SkillsAnim.tsx';
+---
+
+
+
+
+
+<Layout title={t.title[pageKey]} pageClass={`${lang} ${pageKey}`}>
+    <Aboutme lang={lang}/>
+    <!-- <SkillsAnim client:load /> -->
+</Layout>

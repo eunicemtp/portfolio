@@ -1,20 +1,27 @@
 ---
 import LangSwitcher from './LangSwitcher.astro';
-const { lang } = Astro.props;
+import { translations } from '../data/lang.js';
+// const { currentLang = "en" } = Astro.props;
+type Lang = 'en' | 'fr';
+
+
+const { lang } = Astro.props as { lang: Lang };
+
+const t = translations[lang] || translations['en'];
+
 
 ---
 <header class="w-full flex">
   <nav class="w-full py-4 px-6 flex justify-end items-center h-[10vh]">
     <ul class="flex gap-6 font-medium">
-      <li><a href="/" class="js-work-link">Home<span class="underline bg-purple-darker"></span></a></li>
-      <li><a href="/about" class="js-work-link">About<span class="underline bg-purple-darker"></span></a></li>
-      <li><a href="/work" class="js-work-link">Work<span class="underline bg-purple-darker"></span></a></li>
-      <li><a href="/contact" class="js-work-link">Contact<span class="underline bg-purple-darker"></span></a></li>
+      <li><a href={`/${lang}/`} class="js-work-link">{t.title.home}<span class="underline bg-purple-darker"></span></a></li>
+      <li><a href={`/${lang}/about`} class="js-work-link">{t.title.about}<span class="underline bg-purple-darker"></span></a></li>
+      <li><a href={`/${lang}/work`} class="js-work-link">{t.title.work}<span class="underline bg-purple-darker"></span></a></li>
+      <li><a href={`/${lang}/contact`}class="js-work-link">{t.title.contact}<span class="underline bg-purple-darker"></span></a></li>
       <LangSwitcher currentLang={lang} />
     </ul>
   </nav>
 </header>
-
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 

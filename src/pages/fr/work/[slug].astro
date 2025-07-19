@@ -1,0 +1,138 @@
+---
+// Astro frontmatter
+import projets from '../../../data/projets.json';
+import Layout from '../../../layouts/Layout.astro';
+import { translations } from '../../../data/lang.js';
+
+export async function getStaticPaths() {
+    return projets.map((projet) => ({
+      params: { slug: projet.slug }
+    }));
+  }
+
+const { slug } = Astro.params;
+const projet = projets.find((p) => p.slug === slug);
+
+const lang = 'fr';
+
+const t = translations[lang];
+
+if (!projet) throw new Error(`Projet not found: ${slug}`);
+
+const currentIndex = projets.findIndex((p) => p.slug === slug);
+const previous = projets[currentIndex - 1] || null;
+const next = projets[currentIndex + 1] || null;
+
+const pageKey = projet.nom;
+
+let gallery: string[] = [];
+
+
+if (projet.slug === 'photography') {
+  const files = import.meta.glob('../../assets/photography/*.jpg', { eager: true, as: 'url' });
+  gallery = Object.values(files);
+} else if (projet.gallery) {
+  gallery = projet.gallery;
+}
+
+
+---
+
+<Layout title={projet.nom} pageClass={`work-detail ${lang} ${pageKey}`}>
+    <button
+  onclick="history.back()"
+  class="absolute top-6 left-6 flex items-center gap-2 text-blue font-semibold hover:text-purple-darker transition"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+  </svg>
+  Back
+</button>
+  <!-- HERO -->
+  <section class="bg-purple-light text-blue py-20 px-6 md:px-16">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 items-center gap-12">
+    <!-- Texte -->
+    <div class="md:pr-8">
+      <h1 class="text-h1 font-bold mb-4">{projet.nom}</h1>
+      {projet.slogan && <p class="text-lg leading-relaxed">{projet.slogan}</p>}
+    </div>
+
+    <!-- Image -->
+    {projet.image && (
+           <div class="flex justify-end">
+        <img
+          src={projet.image}
+          alt={projet.nom}
+          class="rounded-xl shadow-lg w-full max-w-[500px] md:max-w-[600px] banner_img"
+        />
+      </div>
+    )}
+  </div>
+</section>
+
+  <!-- ABOUT SECTION -->
+  {projet.about && (
+    <section class="bg-whitey text-blue py-16 px-6 md:px-16">
+      <div class="max-w-4xl mx-auto space-y-6">
+        <h2 class="text-h3 font-bold">About the project</h2>
+        <p>{projet.about}</p>
+      </div>
+    </section>
+  )}
+
+  <!-- GALLERY -->
+<!-- {projet.gallery && projet.gallery.length > 0 && ( -->
+ {gallery.length > 0 && (
+  <section class="bg-mint py-16 px-6 md:px-16">
+    <div class={
+      projet.slug === 'photography'
+        ? 'max-w-6xl mx-auto columns-1 sm:columns-2 md:columns-3 gap-4 space-y-4'
+        : 'max-w-6xl mx-auto grid md:grid-cols-3 gap-8'
+    }>
+      {gallery.map(img => (
+        <img
+          src={img}
+          alt={projet.slug === 'hobby' ? 'Hobby photo' : `Visual for ${projet.nom}`}
+          class={
+            projet.slug === 'photography'
+              ? 'rounded-xl shadow-md w-full mb-4 break-inside-avoid hover:scale-[1.02] transition duration-300 ease-in-out'
+              : 'rounded-xl shadow-md hover:scale-105 transition '
+          }
+          loading="lazy"
+        />
+      ))}
+    </div>
+  </section>
+)}
+
+
+
+  <!-- TECH STACK -->
+  {projet.stack && projet.stack.length > 0 && (
+    <section class="bg-white py-16 px-6 md:px-16 text-blue">
+      <div class="max-w-4xl mx-auto space-y-8">
+        <h2 class="text-h4 font-bold">Tech stack</h2>
+        <div class="flex flex-wrap gap-4">
+          {projet.stack.map(tech => (
+            <span class="bg-purple-light text-purple-darker px-4 py-2 rounded-full text-sm font-semibold shadow-sm">
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- NAVIGATION -->
+  <section class="bg-purple-light py-10 text-center flex flex-col md:flex-row justify-between px-6 md:px-16">
+    {previous && (
+      <a href={`/work/${previous.slug}`} class="text-white underline font-bold hover:text-blue transition">← {previous.nom}</a>
+    )}
+    <a href="/work" class="text-white underline font-bold hover:text-blue transition my-4 md:my-0">Back to all projects</a>
+    {next && (
+      <a href={`/work/${next.slug}`} class="text-white underline font-bold hover:text-blue transition">{next.nom} →</a>
+    )}
+  </section>
+</Layout>
+
+
